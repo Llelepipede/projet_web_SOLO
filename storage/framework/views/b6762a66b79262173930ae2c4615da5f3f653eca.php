@@ -1,0 +1,1 @@
+<?php /**PATH C:\Users\pches\Desktop\projet_tech_web\bonjour\projet\resources\views/footer.blade.php ENDPATH**/ ?>
