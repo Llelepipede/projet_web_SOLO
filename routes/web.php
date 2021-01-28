@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Models\User;
-use App\Models\Product;
+use App\Models\product;
 
 
 /*
@@ -36,15 +36,40 @@ Route::get('/inscription', function () {
 
 Route::post('/inscription', function () {
 
-    $Utilisateur = new User;
-    $Utilisateur->email = request('email');
-    $Utilisateur->password = request('password');
-    $Utilisateur->name = request('name');
+
+    $Utilisateur = User::create([
+        'email' => request('email'),
+        'password' => request('password'),
+        'name' => request('name'),
+        ]);
     
-    return 'Formulaire recu votre mot mail est:' .request('email');
+    return view('inscription'). 'Formulaire recu votre mot mail est:' .request('email');
 });
 
 
+Route::get('/addproduct', function () {
+    return view('addproduct');
+});
+
+Route::post('/addproduct', function () {
+
+    $product = product::create([
+        'name' => request('name'),
+        'description' => request('description'),
+        'price' => request('price'),
+        ]);
+    return view('addproduct');
+});
+
+
+
+Route::get('/allproduct',function() {
+    $produits = product::all();
+
+    return view('allproduct', [
+        'produit' => $produits,
+    ]);
+});
 
 Route::get('/product/{id}',function() {
     $id = request('id');
